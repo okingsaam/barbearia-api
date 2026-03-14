@@ -21,15 +21,45 @@ public class Cliente {
     private String email;
 
     @Column( name = "data_cadastro")
-    private String dataCadastro;
+    private LocalDateTime dataCadastro;
 
-    public Cliente(){
+    public Cliente() {
     }
+
     @PrePersist
     public void prePersist() {
-        this.dataCadastro = LocalDateTime.now().toString();
+        this.dataCadastro = LocalDateTime.now();
     }
-    public Long getId(){
+
+    public Long getId() {
         return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public LocalDateTime getDataCadastro() {
+        return dataCadastro;
     }
 }

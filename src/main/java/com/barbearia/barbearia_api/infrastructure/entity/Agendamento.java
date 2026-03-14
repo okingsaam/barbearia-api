@@ -31,6 +31,7 @@ public class Agendamento {
 
     public Long getId() {
         return id;
+
     }
 
     public LocalDateTime getDataHora() {

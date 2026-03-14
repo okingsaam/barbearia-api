@@ -1,4 +1,4 @@
-package entity;
+package com.barbearia.barbearia_api.entity;
 
 
 import jakarta.persistence.*;

@@ -1,100 +1,121 @@
 # 💈 Barbearia API
 
-API REST para gerenciamento de uma barbearia, desenvolvida com **Spring Boot** e **PostgreSQL**.
-O sistema permite gerenciar clientes, barbeiros, serviços, produtos, vendas e agendamentos.
+API REST completa para gerenciamento de barbearia, desenvolvida com **Spring Boot** e **PostgreSQL**.
+Autenticação segura com **Spring Security + JWT**.
 
 ---
 
-# 🚀 Tecnologias utilizadas
+## 🚀 Tecnologias utilizadas
 
-* Java 17
-* Spring Boot
-* Spring Data JPA
-* Hibernate
-* PostgreSQL
-* Maven
-* Swagger / OpenAPI
+- Java 17
+- Spring Boot 4
+- Spring Security + JWT (jjwt 0.12.6)
+- Spring Data JPA / Hibernate
+- PostgreSQL
+- Maven
+- Swagger / OpenAPI
+- Lombok
 
 ---
 
-# 📦 Estrutura do Projeto
+## 🔐 Autenticação
+
+A API utiliza autenticação via **JWT (JSON Web Token)**.
+
+### Registrar usuário
+```
+POST /auth/register
+Content-Type: application/json
+
+{
+  "email": "usuario@email.com",
+  "senha": "suasenha"
+}
+```
+
+### Login
+```
+POST /auth/login
+Content-Type: application/json
+
+{
+  "email": "usuario@email.com",
+  "senha": "suasenha"
+}
+```
+
+Resposta:
+```json
+{
+  "token": "eyJhbGciOiJIUzI1NiJ9..."
+}
+```
+
+### Usando o token
+
+Em todas as requisições protegidas, envie o header:
+```
+Authorization: Bearer <seu_token>
+```
+
+Rotas públicas: `/auth/**`, `/swagger-ui/**`, `/v3/api-docs/**`
+
+---
+
+## 📦 Estrutura do Projeto
 
 ```
 src/main/java/com/barbearia/barbearia_api
-
-controller
-│
-infrastructure
+├── controller
+├── infrastructure
 │   ├── entity
-│   │   Cliente
-│   │   Barbeiro
-│   │   Servico
-│   │   Produto
-│   │   Venda
-│   │   ItemVenda
-│   │   Agendamento
-│   │
 │   └── repository
-│
-service
-│
-BarbeariaApiApplication
+├── security
+│   ├── dto
+│   ├── AuthService
+│   ├── AuthController (dentro de controller/)
+│   ├── JwtFilter
+│   ├── JwtService
+│   └── SecurityConfig
+└── service
 ```
 
-Arquitetura utilizada:
-
+Arquitetura:
 ```
 Controller → Service → Repository → Database
 ```
 
 ---
 
-# ⚙️ Funcionalidades
+## ⚙️ Funcionalidades
 
 ### 👤 Clientes
-
-* Cadastrar cliente
-* Listar clientes
-* Buscar cliente por ID
-* Deletar cliente
+- Cadastrar, listar, buscar por ID e deletar
 
 ### ✂️ Barbeiros
-
-* Cadastro de barbeiros
-* Listagem de barbeiros
+- Cadastrar e listar
 
 ### 🧾 Serviços
-
-* Cadastro de serviços da barbearia
-* Listagem de serviços
+- Cadastrar e listar
 
 ### 🛍 Produtos
-
-* Cadastro de produtos
-* Controle de estoque
+- Cadastrar e controle de estoque
 
 ### 📅 Agendamentos
-
-* Agendar atendimento
-* Relacionamento entre cliente, barbeiro e serviço
+- Agendar com relacionamento entre cliente, barbeiro e serviço
 
 ### 💰 Vendas
-
-* Registro de vendas
-* Vários itens por venda
-* Produtos vinculados
+- Registro de vendas com múltiplos itens vinculados a produtos
 
 ---
 
-# 🗄 Banco de Dados
+## 🗄 Banco de Dados
 
-Banco utilizado:
+Banco: **PostgreSQL**
 
-PostgreSQL
-
-Principais tabelas:
-
+Tabelas principais:
 ```
+usuarios
 clientes
 barbeiros
 servicos
@@ -104,140 +125,99 @@ vendas
 itens_venda
 ```
 
-Relacionamentos principais:
-
+Relacionamentos:
 ```
-Agendamento → Cliente
-Agendamento → Barbeiro
-Agendamento → Servico
-
-Venda → ItemVenda
-ItemVenda → Produto
+Agendamento → Cliente, Barbeiro, Servico
+Venda → ItemVenda → Produto
 ```
 
 ---
 
-# ▶️ Como executar o projeto
+## ▶️ Como executar
 
-### 1️⃣ Clonar repositório
-
-```
-git clone https://github.com/seu-usuario/barbearia-api.git
-```
-
-### 2️⃣ Entrar na pasta
-
-```
+### 1. Clonar o repositório
+```bash
+git clone https://github.com/okingsaam/barbearia-api.git
 cd barbearia-api
 ```
 
-### 3️⃣ Configurar banco de dados
+### 2. Configurar variáveis de ambiente
 
-No arquivo:
-
-```
-application.properties
-```
-
-Configurar:
-
-```
-spring.datasource.url=jdbc:postgresql://localhost:2714/barbearia_db
+No `application.properties`, configure:
+```properties
+spring.datasource.url=jdbc:postgresql://localhost:5432/barbearia
 spring.datasource.username=postgres
-spring.datasource.password=123
+spring.datasource.password=${DB_PASSWORD:suasenha}
 ```
 
----
-
-### 4️⃣ Rodar aplicação
-
-```
+### 3. Rodar a aplicação
+```bash
 mvn spring-boot:run
 ```
 
-ou rodar a classe:
-
-```
-BarbeariaApiApplication
-```
-
 ---
 
-# 📚 Documentação da API
+## 📚 Documentação Swagger
 
-Após rodar o projeto, acesse:
-
+Com o projeto rodando, acesse:
 ```
 http://localhost:8080/swagger-ui/index.html
 ```
 
-Interface para testar todos os endpoints da API.
-
 ---
 
-# 📌 Endpoints principais
+## 📌 Endpoints principais
 
-Clientes
-
+### Auth (público)
 ```
-POST /clientes
-GET /clientes
-GET /clientes/{id}
+POST /auth/register
+POST /auth/login
+```
+
+### Clientes (requer token)
+```
+POST   /clientes
+GET    /clientes
+GET    /clientes/{id}
 DELETE /clientes/{id}
 ```
 
-Barbeiros
-
+### Barbeiros
 ```
 POST /barbeiros
-GET /barbeiros
+GET  /barbeiros
 ```
 
-Serviços
-
+### Serviços
 ```
 POST /servicos
-GET /servicos
+GET  /servicos
 ```
 
-Produtos
-
+### Produtos
 ```
 POST /produtos
-GET /produtos
+GET  /produtos
 ```
 
-Agendamentos
-
+### Agendamentos
 ```
 POST /agendamentos
-GET /agendamentos
+GET  /agendamentos
 ```
 
-Vendas
-
+### Vendas
 ```
 POST /vendas
-GET /vendas
+GET  /vendas
 ```
 
 ---
 
-# 🎯 Objetivo do projeto
+## 👨‍💻 Autor
 
-Este projeto foi desenvolvido como prática de backend para consolidar conhecimentos em:
-
-* APIs REST
-* Spring Boot
-* JPA / Hibernate
-* modelagem de banco de dados
-* arquitetura em camadas
-
----
-
-# 👨‍💻 Autor
-
-Douglas
+**Sam Douglas Francisco dos Santos**
 Estudante de Análise e Desenvolvimento de Sistemas
 
-Projeto desenvolvido para fins de estudo e portfólio.
+- GitHub: https://github.com/okingsaam
+- LinkedIn: https://www.linkedin.com/in/samdouglas-dev/

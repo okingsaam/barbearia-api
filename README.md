@@ -5,6 +5,16 @@ Autenticação segura com **Spring Security + JWT**.
 
 ---
 
+## 🌐 API em Produção
+
+> API deployada e funcionando no Railway:
+
+**Base URL:** `https://diligent-transformation-production-4c42.up.railway.app`
+
+**Swagger:** `https://diligent-transformation-production-4c42.up.railway.app/swagger-ui/index.html`
+
+---
+
 ## 🚀 Tecnologias utilizadas
 
 - Java 17
@@ -133,7 +143,7 @@ Venda → ItemVenda → Produto
 
 ---
 
-## ▶️ Como executar
+## ▶️ Como executar localmente
 
 ### 1. Clonar o repositório
 ```bash
@@ -142,12 +152,10 @@ cd barbearia-api
 ```
 
 ### 2. Configurar variáveis de ambiente
-
-No `application.properties`, configure:
 ```properties
-spring.datasource.url=jdbc:postgresql://localhost:5432/barbearia
-spring.datasource.username=postgres
-spring.datasource.password=${DB_PASSWORD:suasenha}
+SPRING_DATASOURCE_URL=jdbc:postgresql://localhost:5432/barbearia
+SPRING_DATASOURCE_USERNAME=postgres
+SPRING_DATASOURCE_PASSWORD=suasenha
 ```
 
 ### 3. Rodar a aplicação
@@ -159,7 +167,6 @@ mvn spring-boot:run
 
 ## 📚 Documentação Swagger
 
-Com o projeto rodando, acesse:
 ```
 http://localhost:8080/swagger-ui/index.html
 ```

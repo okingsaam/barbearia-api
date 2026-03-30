@@ -27,14 +27,11 @@ public class AgendamentoService {
 
     @Transactional
     public Agendamento criar(AgendamentoRequest request) {
-        Cliente cliente = clienteRepository.findById(request.getClienteId())
-                .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+        Cliente cliente = buscarCliente(request.getClienteId());
 
-        Barbeiro barbeiro = barbeiroRepository.findById(request.getBarbeiroId())
-                .orElseThrow(() -> new RuntimeException("Barbeiro não encontrado"));
 
-        Servico servico = servicoRepository.findById(request.getServicoId())
-                .orElseThrow(() -> new RuntimeException("Serviço não encontrado"));
+        Barbeiro barbeiro = buscarBarbeiro(request.getBarbeiroId());
+        Servico servico = buscarServico(request.getServicoId());
 
         Agendamento agendamento = new Agendamento();
         agendamento.setCliente(cliente);
@@ -46,7 +43,26 @@ public class AgendamentoService {
         return agendamentoRepository.save(agendamento);
     }
 
-    public List<Agendamento> listar() {
+    private Cliente buscarCliente(Long id) {
+        return clienteRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
+
+
+    }
+
+    private Barbeiro buscarBarbeiro(Long id) {
+        return barbeiroRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Barbeiro não encontrado"));
+    }
+
+    private Servico buscarServico(Long id) {
+        return servicoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Servico não encontrado"));
+
+    }
+
+
+        public List<Agendamento> listar() {
         return agendamentoRepository.findAll();
     }
 
@@ -63,3 +79,4 @@ public class AgendamentoService {
         agendamentoRepository.deleteById(id);
     }
 }
+

@@ -2,6 +2,7 @@ package com.barbearia.barbearia_api.controller;
 
 import com.barbearia.barbearia_api.infrastructure.entity.Venda;
 import com.barbearia.barbearia_api.service.VendaService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,13 +10,11 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/vendas")
+@RequiredArgsConstructor
+
 public class VendaController {
 
     private final VendaService vendaService;
-
-    public VendaController(VendaService vendaService) {
-        this.vendaService = vendaService;
-    }
 
     @PostMapping
     public Venda criar(@RequestBody Venda venda){

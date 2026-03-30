@@ -3,6 +3,7 @@ package com.barbearia.barbearia_api.controller;
 import com.barbearia.barbearia_api.infrastructure.dto.AgendamentoRequest;
 import com.barbearia.barbearia_api.infrastructure.entity.Agendamento;
 import com.barbearia.barbearia_api.service.AgendamentoService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -10,13 +11,12 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/agendamentos")
+@RequiredArgsConstructor
+
+
 public class AgendamentoController {
 
     private final AgendamentoService agendamentoService;
-
-    public AgendamentoController(AgendamentoService agendamentoService) {
-        this.agendamentoService = agendamentoService;
-    }
 
     @PostMapping
     public Agendamento criar(@RequestBody AgendamentoRequest request) {

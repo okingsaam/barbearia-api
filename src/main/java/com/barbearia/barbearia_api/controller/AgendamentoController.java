@@ -1,5 +1,6 @@
 package com.barbearia.barbearia_api.controller;
 
+import com.barbearia.barbearia_api.infrastructure.dto.AgendamentoRequest;
 import com.barbearia.barbearia_api.infrastructure.entity.Agendamento;
 import com.barbearia.barbearia_api.service.AgendamentoService;
 import org.springframework.web.bind.annotation.*;
@@ -18,22 +19,22 @@ public class AgendamentoController {
     }
 
     @PostMapping
-    public Agendamento criar(@RequestBody Agendamento agendamento){
-        return agendamentoService.salvar(agendamento);
+    public Agendamento criar(@RequestBody AgendamentoRequest request) {
+        return agendamentoService.criar(request);
     }
 
     @GetMapping
-    public List<Agendamento> listar(){
+    public List<Agendamento> listar() {
         return agendamentoService.listar();
     }
 
     @GetMapping("/{id}")
-    public Optional<Agendamento> buscar(@PathVariable Long id){
+    public Optional<Agendamento> buscar(@PathVariable Long id) {
         return agendamentoService.buscarPorId(id);
     }
 
     @DeleteMapping("/{id}")
-    public void deletar(@PathVariable Long id){
+    public void deletar(@PathVariable Long id) {
         agendamentoService.deletar(id);
     }
 }

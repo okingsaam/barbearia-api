@@ -19,7 +19,7 @@ public class BarbeariaApiApplication {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
 				registry.addMapping("/**")
-						.allowedOrigins("https://seudominio.com") // coloque aqui o domínio do frontend
+						.allowedOrigins("https://barbearia-frontend-production-54df.up.railway.app")
 						.allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
 						.allowedHeaders("*")
 						.allowCredentials(true);

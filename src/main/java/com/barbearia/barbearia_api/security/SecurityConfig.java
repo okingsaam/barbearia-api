@@ -30,8 +30,13 @@ public class SecurityConfig {
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/agendamentos/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/agendamentos/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/barbeiros/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/servicos/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/clientes/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/clientes/**").permitAll()
                         .requestMatchers(
                                 "/auth/**",
                                 "/swagger-ui/**",

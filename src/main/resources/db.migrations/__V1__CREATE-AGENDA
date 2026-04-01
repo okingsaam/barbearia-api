@@ -1,0 +1,8 @@
+CREATE TABLE agendamentos (
+    id SERIAL PRIMARY KEY,
+    data_hora TIMESTAMP NOT NULL,
+    status VARCHAR(50) NOT NULL,
+    barbeiro_id INTEGER NOT NULL,
+    cliente_id INTEGER NOT NULL,
+    servico_id INTEGER NOT NULL
+);

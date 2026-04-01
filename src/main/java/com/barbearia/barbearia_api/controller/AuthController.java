@@ -1,7 +1,6 @@
 package com.barbearia.barbearia_api.controller;
 
 import com.barbearia.barbearia_api.security.AuthService;
-import com.barbearia.barbearia_api.security.dto.AuthResponse;
 import com.barbearia.barbearia_api.security.dto.LoginRequest;
 import com.barbearia.barbearia_api.security.dto.RegisterRequest;
 import jakarta.validation.Valid;

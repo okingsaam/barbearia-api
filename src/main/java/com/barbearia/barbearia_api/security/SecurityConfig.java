@@ -24,21 +24,19 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) {
         http
+                .cors(cors -> cors.configure(http)) // 👈 ESTA LINHA FOI ADICIONADA
                 .csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        // rotas públicas
                         .requestMatchers(
                                 "/auth/**",
                                 "/swagger-ui/**",
                                 "/swagger-ui.html",
                                 "/v3/api-docs/**",
-                                "/agendamentos/**" // clientes podem acessar sem login
+                                "/agendamentos/**"
                         ).permitAll()
-                        // rotas de admin protegidas
                         .requestMatchers("/admin/**").authenticated()
-                        // qualquer outra rota exige login
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);

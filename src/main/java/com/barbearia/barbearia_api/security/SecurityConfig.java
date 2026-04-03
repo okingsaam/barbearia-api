@@ -45,6 +45,10 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/servicos/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/clientes/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/clientes/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/vendas/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/vendas/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/produtos/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/produtos/**").permitAll()
                         .requestMatchers(
                                 "/auth/**",
                                 "/swagger-ui/**",

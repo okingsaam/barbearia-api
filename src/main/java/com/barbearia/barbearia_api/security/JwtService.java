@@ -3,6 +3,7 @@ package com.barbearia.barbearia_api.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
@@ -11,11 +12,13 @@ import java.util.Date;
 @Service
 public class JwtService {
 
-    private static final String SECRET = "barbearia-api-secret-key-super-segura-2024";
+    @Value("${jwt.secret:barbearia-api-secret-key-super-segura-2024}")
+    private String secret;
+
     private static final long EXPIRACAO = 1000 * 60 * 60 * 8; // 8 horas
 
     private SecretKey getKey() {
-        return Keys.hmacShaKeyFor(SECRET.getBytes());
+        return Keys.hmacShaKeyFor(secret.getBytes());
     }
 
     public String gerarToken(String email) {

@@ -31,6 +31,11 @@ public class ServicoController {
         return servicoService.buscarPorId(id);
     }
 
+    @PutMapping("/{id}")
+    public Servico atualizar(@PathVariable Long id, @RequestBody Servico servico) {
+        return servicoService.atualizar(id, servico);
+    }
+
     @DeleteMapping("/{id}")
     public void deletar(@PathVariable Long id){
         servicoService.deletar(id);

@@ -28,6 +28,14 @@ public class BarbeiroService {
         return barbeiroRepository.findById(id);
     }
 
+    public Barbeiro atualizar(Long id, Barbeiro barbeiroAtualizado) {
+        Barbeiro barbeiro = barbeiroRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Barbeiro não encontrado"));
+        barbeiro.setNome(barbeiroAtualizado.getNome());
+        barbeiro.setTelefone(barbeiroAtualizado.getTelefone());
+        return barbeiroRepository.save(barbeiro);
+    }
+
     public void deletar(Long id) {
         barbeiroRepository.deleteById(id);
     }

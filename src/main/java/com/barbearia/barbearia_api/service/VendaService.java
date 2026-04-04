@@ -28,6 +28,13 @@ public class VendaService {
         return vendaRepository.findById(id);
     }
 
+    public Venda atualizar(Long id, Venda vendaAtualizada) {
+        Venda venda = vendaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Venda não encontrada"));
+        venda.setDataVenda(vendaAtualizada.getDataVenda());
+        return vendaRepository.save(venda);
+    }
+
     public void deletar(Long id) {
         vendaRepository.deleteById(id);
     }

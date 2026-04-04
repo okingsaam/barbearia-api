@@ -31,6 +31,11 @@ public class ClienteController {
         return clienteService.buscarPorId(id);
     }
 
+    @PutMapping("/{id}")
+    public Cliente atualizar(@PathVariable Long id, @RequestBody Cliente cliente) {
+        return clienteService.atualizarCliente(id, cliente);
+    }
+
     @DeleteMapping("/{id}")
     public void deletarCliente(@PathVariable Long id) {
         clienteService.deletarCliente(id);

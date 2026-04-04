@@ -62,6 +62,18 @@ public class AgendamentoService {
     }
 
 
+    @Transactional
+    public Agendamento atualizarStatus(Long id, String status) {
+        List<String> statusValidos = List.of("AGENDADO", "CONFIRMADO", "CANCELADO", "CONCLUIDO");
+        if (!statusValidos.contains(status)) {
+            throw new RuntimeException("Status inválido. Valores permitidos: " + statusValidos);
+        }
+        Agendamento agendamento = agendamentoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Agendamento não encontrado"));
+        agendamento.setStatus(status);
+        return agendamentoRepository.save(agendamento);
+    }
+
         public List<Agendamento> listar() {
         return agendamentoRepository.findAll();
     }

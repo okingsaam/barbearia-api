@@ -31,6 +31,11 @@ public class BarbeiroController {
         return barbeiroService.buscarPorId(id);
     }
 
+    @PutMapping("/{id}")
+    public Barbeiro atualizar(@PathVariable Long id, @RequestBody Barbeiro barbeiro) {
+        return barbeiroService.atualizar(id, barbeiro);
+    }
+
     @DeleteMapping("/{id}")
     public void deletar(@PathVariable Long id){
         barbeiroService.deletar(id);

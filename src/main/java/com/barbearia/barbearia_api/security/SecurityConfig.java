@@ -58,6 +58,7 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/itens-venda/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/itens-venda/**").permitAll()
                         .requestMatchers(HttpMethod.DELETE, "/itens-venda/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/dashboard/**").permitAll()
                         .requestMatchers(
                                 "/auth/**",
                                 "/swagger-ui/**",

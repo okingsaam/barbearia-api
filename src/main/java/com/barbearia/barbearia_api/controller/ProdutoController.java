@@ -32,6 +32,11 @@ public class ProdutoController {
         return produtoService.buscarPorId(id);
     }
 
+    @PutMapping("/{id}")
+    public Produto atualizar(@PathVariable Long id, @RequestBody Produto produto) {
+        return produtoService.atualizar(id, produto);
+    }
+
     @DeleteMapping("/{id}")
     public void deletar(@PathVariable Long id){
         produtoService.deletar(id);

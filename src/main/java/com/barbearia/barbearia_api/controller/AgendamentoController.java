@@ -1,6 +1,7 @@
 package com.barbearia.barbearia_api.controller;
 
 import com.barbearia.barbearia_api.infrastructure.dto.AgendamentoRequest;
+import com.barbearia.barbearia_api.infrastructure.dto.AtualizarStatusRequest;
 import com.barbearia.barbearia_api.infrastructure.entity.Agendamento;
 import com.barbearia.barbearia_api.service.AgendamentoService;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +32,11 @@ public class AgendamentoController {
     @GetMapping("/{id}")
     public Optional<Agendamento> buscar(@PathVariable Long id) {
         return agendamentoService.buscarPorId(id);
+    }
+
+    @PutMapping("/{id}/status")
+    public Agendamento atualizarStatus(@PathVariable Long id, @RequestBody AtualizarStatusRequest request) {
+        return agendamentoService.atualizarStatus(id, request.getStatus());
     }
 
     @DeleteMapping("/{id}")

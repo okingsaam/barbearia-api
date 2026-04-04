@@ -28,6 +28,15 @@ public class ServicoService {
         return servicoRepository.findById(id);
     }
 
+    public Servico atualizar(Long id, Servico servicoAtualizado) {
+        Servico servico = servicoRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Serviço não encontrado"));
+        servico.setNome(servicoAtualizado.getNome());
+        servico.setDescricao(servicoAtualizado.getDescricao());
+        servico.setPreco(servicoAtualizado.getPreco());
+        return servicoRepository.save(servico);
+    }
+
     public void deletar(Long id) {
         servicoRepository.deleteById(id);
     }

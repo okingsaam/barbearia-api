@@ -16,6 +16,10 @@ public class ItemVendaService {
         this.itemVendaRepository = itemVendaRepository;
     }
 
+    public ItemVenda salvar(ItemVenda itemVenda) {
+        return itemVendaRepository.save(itemVenda);
+    }
+
     public List<ItemVenda> listar() {
         return itemVendaRepository.findAll();
     }

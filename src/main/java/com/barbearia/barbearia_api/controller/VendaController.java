@@ -31,6 +31,11 @@ public class VendaController {
         return vendaService.buscarPorId(id);
     }
 
+    @PutMapping("/{id}")
+    public Venda atualizar(@PathVariable Long id, @RequestBody Venda venda) {
+        return vendaService.atualizar(id, venda);
+    }
+
     @DeleteMapping("/{id}")
     public void deletar(@PathVariable Long id){
         vendaService.deletar(id);

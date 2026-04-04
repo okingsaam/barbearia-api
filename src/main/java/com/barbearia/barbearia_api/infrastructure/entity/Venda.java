@@ -15,6 +15,13 @@ public class Venda {
 
     public Venda() {}
 
+    @PrePersist
+    public void prePersist() {
+        if (this.dataVenda == null) {
+            this.dataVenda = LocalDateTime.now();
+        }
+    }
+
     public Long getId() {
         return id;
     }

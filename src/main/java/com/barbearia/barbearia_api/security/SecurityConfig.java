@@ -41,14 +41,23 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/agendamentos/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/agendamentos/**").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/agendamentos/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/barbeiros/**").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/barbeiros/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/servicos/**").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/servicos/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/clientes/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/clientes/**").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/clientes/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/vendas/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/vendas/**").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/vendas/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/produtos/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/produtos/**").permitAll()
+                        .requestMatchers(HttpMethod.PUT, "/produtos/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/itens-venda/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/itens-venda/**").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/itens-venda/**").permitAll()
                         .requestMatchers(
                                 "/auth/**",
                                 "/swagger-ui/**",
